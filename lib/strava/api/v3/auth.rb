@@ -13,26 +13,26 @@ module Strava::Api::V3
     # @return access_token + athlete json (see http://strava.github.io/api/v3/oauth/#token-exchange)
     def self.retrieve_access(client_id, client_secret, code)
       args = {
-          client_id: client_id,
-          client_secret: client_secret,
-          code: code
+        client_id: client_id,
+        client_secret: client_secret,
+        code: code
       }
 
       HTTMultiParty.public_send(
-          'post',
-          Strava::Api::V3::Configuration::DEFAULT_AUTH_ENDPOINT,
-          query: args
+        'post',
+        Strava::Api::V3::Configuration::DEFAULT_AUTH_ENDPOINT,
+        query: args
       )
     end
 
     def self.deauthorize(access_token)
       args = {
-          access_token: access_token
+        access_token: access_token
       }
       HTTMultiParty.public_send(
-          'post',
-          Strava::Api::V3::Configuration::DEFAULT_DEAUTH_ENDPOINT,
-          query: args
+        'post',
+        Strava::Api::V3::Configuration::DEFAULT_DEAUTH_ENDPOINT,
+        query: args
       )
     end
   end
