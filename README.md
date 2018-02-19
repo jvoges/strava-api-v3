@@ -262,6 +262,14 @@ athlete_information = access_information['athlete']
 
 ```
 
+### Deauthorization
+
+Allows an application to revoke its access to an athlete’s data. This will invalidate all access tokens associated with the ‘athlete,application’ pair used to create the token. The application will be removed from the Athlete Settings page on Strava. All requests made using invalidated tokens will receive a 401 Unauthorized response.
+see [https://developers.strava.com/docs/authentication/#deauthorization](https://developers.strava.com/docs/authentication/#deauthorization) for more info
+
+``` ruby
+Strava::Api::V3::Auth.deauthorize(access_token) 
+```
 
 ## Contributors
 
