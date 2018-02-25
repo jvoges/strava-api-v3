@@ -33,6 +33,7 @@ module Strava::Api::V3
 
     # Define the same set of accessors as the Awesome module
     attr_accessor *Configuration::VALID_CONFIG_KEYS
+    attr_accessor :limit1, :used1, :limit2, :used2
 
     def initialize(options={})
       # Merge the config values from the module and those passed
