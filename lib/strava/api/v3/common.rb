@@ -4,6 +4,8 @@ require 'strava/api/v3/errors'
 
 module Strava::Api::V3
   module Common
+    attr_accessor :limit1, :used1, :limit2, :used2
+
     # Make a call directly to the Strava API.
     # (See any of the other methods for example invocations.)
     #
@@ -67,9 +69,13 @@ module Strava::Api::V3
       # make the request via the provided service
       result = HTTMultiParty.public_send(verb, "#{Strava::Api::V3::Configuration::DEFAULT_ENDPOINT}#{path}", :query => args)
 
+      limit1 = result.headers['x-ratelimit-limit']
+      used1 = result.headers['x-ratelimit-usage']
+
       if result.code.to_i >= 500
         raise Strava::Api::V3::ServerError.new(result.code.to_i, result.body)
       end
+
 
       yield result if error_checking_block
 
